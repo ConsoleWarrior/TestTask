@@ -335,6 +335,7 @@ GameObject:
   - component: {fileID: 732557964162905134}
   - component: {fileID: 5183751714707130826}
   - component: {fileID: 1767740521091424472}
+  - component: {fileID: 5964793339669721215}
   m_Layer: 8
   m_Name: Character
   m_TagString: Untagged
@@ -498,6 +499,22 @@ MonoBehaviour:
   jumpHeight: 2.5
   gravity: -15
   turnSpeed: 720
+--- !u!114 &5964793339669721215
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1204630019270294518}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0719271f7689fd48b4df4dad5279827, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerHealth
+  maxHealth: 3
+  invulnerableTime: 1
+  restartDelay: 2
+  fallLimit: -30
 --- !u!1 &1283389521562087769
 GameObject:
   m_ObjectHideFlags: 0
