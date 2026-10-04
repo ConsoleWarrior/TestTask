@@ -28,6 +28,13 @@ public class PlayerMovement : MonoBehaviour
         lineZ = transform.position.z;
     }
 
+    void OnDisable()
+    {
+        // скрипт выключается при смерти - чтобы не перебирал ногами на месте
+        if (animator != null)
+            animator.SetFloat("Speed", 0);
+    }
+
     // эти методы вызывает PlayerInput (Behavior = Send Messages)
     void OnMove(InputValue value)
     {
