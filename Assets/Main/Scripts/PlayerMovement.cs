@@ -54,6 +54,9 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
+        if (Time.timeScale == 0)
+            return; // пауза - иначе нажатый пробел сработает после Continue
+
         bool grounded = controller.isGrounded;
 
         if (grounded)
