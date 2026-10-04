@@ -1,18 +1,15 @@
 using System;
-using System.Collections;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class PlayerHealth : MonoBehaviour
 {
-    // на эти события подписывается UI, так префабы не ссылаются друг на друга
-    public static event Action<int> HealthChanged;
+    // на это событие подписывается UI, так префабы не ссылаются друг на друга
     public static event Action Died;
 
     [SerializeField] private int maxHealth = 3;
     [SerializeField] private float invulnerableTime = 1f; // после удара какое-то время урон не проходит
-    [SerializeField] private float restartDelay = 2f;
     [SerializeField] private float fallLimit = -30f; // если упал ниже - считаем что умер
+    [SerializeField] private HealthText healthText;
 
     private int health;
     private float lastHitTime = -100f;
@@ -21,7 +18,7 @@ public class PlayerHealth : MonoBehaviour
     void Start()
     {
         health = maxHealth;
-        HealthChanged?.Invoke(health);
+        healthText.Show(health, 0);
     }
 
     void Update()
@@ -40,7 +37,7 @@ public class PlayerHealth : MonoBehaviour
         if (health < 0)
             health = 0;
 
-        HealthChanged?.Invoke(health);
+        healthText.Show(health, damage);
 
         if (health == 0)
             Die();
@@ -51,12 +48,5 @@ public class PlayerHealth : MonoBehaviour
         dead = true;
         GetComponent<PlayerMovement>().enabled = false;
         Died?.Invoke();
-        StartCoroutine(Restart());
-    }
-
-    IEnumerator Restart()
-    {
-        yield return new WaitForSeconds(restartDelay);
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }

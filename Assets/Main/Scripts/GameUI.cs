@@ -1,4 +1,3 @@
-using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
@@ -10,7 +9,6 @@ public class GameUI : MonoBehaviour
     [SerializeField] private GameObject pauseMenu;
     [SerializeField] private GameObject winMenu;
     [SerializeField] private GameObject loseMenu;
-    [SerializeField] private TMP_Text healthText;
 
     private bool gameOver;
 
@@ -27,14 +25,12 @@ public class GameUI : MonoBehaviour
 
     void OnEnable()
     {
-        PlayerHealth.HealthChanged += OnHealthChanged;
         PlayerHealth.Died += OnDied;
         Finish.Reached += OnFinish;
     }
 
     void OnDisable()
     {
-        PlayerHealth.HealthChanged -= OnHealthChanged;
         PlayerHealth.Died -= OnDied;
         Finish.Reached -= OnFinish;
     }
@@ -61,14 +57,9 @@ public class GameUI : MonoBehaviour
         }
     }
 
-    void OnHealthChanged(int health)
-    {
-        healthText.text = "HP: " + health;
-    }
-
     void OnDied()
     {
-        // сам рестарт делает PlayerHealth, тут только показываем меню
+        // перезапуск - кнопкой Restart в этом меню
         gameOver = true;
         pauseMenu.SetActive(false);
         loseMenu.SetActive(true);
